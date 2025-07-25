@@ -8,8 +8,10 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 
-const app = express(); 
-app.use(cors({ origin: ['http://localhost:5500', 'http://127.0.0.1:5500'], credentials: true }));
+const app = express();
+
+app.use(cors({ origin: 
+  ['https://enagickangen.co.in/','http://localhost:5500', 'http://127.0.0.1:5500'], credentials: true }));
 
 app.use(bodyParser.json());
 
@@ -28,21 +30,11 @@ app.use('/api/verify-email', emailVerifyRoute);
 
 const path = require('path');
 
-app.use(express.static(path.join(__dirname, '../client')));
-
-// ✅ Serve HTML only if it's not an API route
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/customer-contact.html'));
-});
-
-//--------------------------------------------------
-
-
 // Root route test
 app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
-    message: "Form submitted and email sent successfully."
+    message: "Backend server is live and working."
   });
 });
 
