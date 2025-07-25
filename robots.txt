@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://enagic-kangen.netlify.app/sitemap.xml

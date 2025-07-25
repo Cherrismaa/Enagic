@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Enagic Cart | Enagic® Hyderabad India</title>
+  
+  <link rel="stylesheet" href="enagic-cart.css">
+  <link rel="stylesheet" href="assets/fonts/noto-sans.css">
+  <link rel="canonical" href="https://enagic-kangen.netlify.app//enagic-cart.html">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="assets/favicon/site.webmanifest">
+  
+</head>
+<body>
+  <div class="cart-header">
+  <a href="store.html" class="back-btn">← Back</a>
+
+  <div class="cart-title-wrapper">
+    <h2 class="cart-title">Your Shopping Cart</h2>
+  </div>
+
+    <div class="cart-count-badge">0 items</div>
+    </div>
+
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Image</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cart-body"></tbody>
+    </table>
+
+    <div id="suggestions" class="cart-suggestions"></div>
+
+    <div id="cart-actions" class="cart-actions">
+      <div class="cart-total">
+        Grand Total: ₹<span id="grand-total">0</span>
+      </div>
+      <div class="cart-buttons">
+        <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+        <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/919876543210?text=Hi%2C%20I%E2%80%99d%20like%20to%20know%20more%20about%20Kangen%20Water."
+  class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="whatsapp-icon" />
+  <span class="whatsapp-text">Chat with us</span>
+  </a>
+
+  <script src="enagic-cart.js"></script>
+</body>
+</html>
