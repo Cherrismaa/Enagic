@@ -10,6 +10,11 @@ export function initEmailVerification({
   successMsgId,
   onVerified
 }) {
+
+  const API_BASE = window.location.hostname.includes("localhost")
+    ? "http://localhost:5000"
+    : "https://enagic-kangen-backend.onrender.com";
+  
   const emailField = document.getElementById(emailFieldId);
   const verifyButton = document.getElementById(verifyButtonId);
   const otpModal = document.getElementById(otpModalId);
@@ -41,10 +46,10 @@ export function initEmailVerification({
 
     currentEmail = email;
 
-    const res = await fetch("http://localhost:5000/api/verify-email/request", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email })
+    const res = await fetch(`${API_BASE}/api/verify-email/request`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email })
 });
 
 const data = await res.json();
@@ -69,7 +74,7 @@ if (res.ok && data.verified) {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/verify-email/verify", {
+      const res = await fetch(`${API_BASE}/api/verify-email/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: currentEmail, otp })

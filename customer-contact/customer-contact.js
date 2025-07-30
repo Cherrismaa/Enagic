@@ -1,6 +1,6 @@
 //customer-contact\customer-contact.js
 
-import { initEmailVerification } from './emailVerification.js';
+import { initEmailVerification } from '../emailVerification.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showLoading();
 
         try {
-      const res = await fetch("http://localhost:5000/api/customer-contact", {
+      const res = await fetch("https://enagic-kangen-backend.onrender.com/api/customer-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

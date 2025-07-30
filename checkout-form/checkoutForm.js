@@ -1,6 +1,11 @@
 //checkout-form\checkoutForm.js
 
-import { initEmailVerification } from './emailVerification.js';
+const isLocalhost = window.location.hostname.includes('localhost');
+const backendBaseURL = isLocalhost
+  ? 'http://localhost:5000'
+  : 'https://enagic-kangen-backend.onrender.com';
+
+import { initEmailVerification } from '../emailVerification';
 
 // Restrict input types
 const fullNameInput = document.querySelector('input[name="fullName"]');
@@ -153,11 +158,11 @@ form.addEventListener('submit', async (e) => {
   loadingOverlay.classList.remove('hidden');
 
   try {
-    const res = await fetch('http://localhost:5000/api/checkoutForm', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+      const res = await fetch(`${backendBaseURL}/api/checkoutForm`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
     const text = await res.text();
     let result;

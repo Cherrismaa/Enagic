@@ -7,7 +7,6 @@ const Cart = mongoose.model('Cart', new mongoose.Schema({
   quantity: Number
 }));
 
-// Add or update item
 router.post('/', async (req, res) => {
   const { productId, quantity } = req.body;
   try {
@@ -26,17 +25,15 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all items
 router.get('/', async (_, res) => {
   const items = await Cart.find();
   res.status(200).json(items);
 });
 
-// ✅ Delete item entirely — fixed version
 router.delete('/:productId', async (req, res) => {
   const { productId } = req.params;
   try {
-    const result = await Cart.deleteMany({ productId }); // Ensures all duplicates are removed
+    const result = await Cart.deleteMany({ productId }); 
     if (result.deletedCount > 0) {
       res.status(200).json({ success: true });
     } else {

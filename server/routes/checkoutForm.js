@@ -1,3 +1,5 @@
+//server\routes\checkoutForm.js
+
 const express = require('express');
 const router = express.Router();
 const dotenv = require('dotenv');
@@ -17,8 +19,10 @@ router.post('/', async (req, res) => {
     state, landmark
   } = req.body;
 
-  if (!fullName || !mobile || !email || !streetNumber || !locality || !city || !pincode || !state) {
-    return res.status(400).json({ message: 'Required fields are missing.' });
+const requiredFields = { fullName, mobile, email, streetNumber, locality, city, pincode, state };
+for (const [key, value] of Object.entries(requiredFields)) {
+  if (!value) return res.status(400).json({ message: `Missing field: ${key}` });
+
   }
 
   try {

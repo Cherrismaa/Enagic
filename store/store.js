@@ -1,33 +1,40 @@
-    window.addEventListener("scroll", () => {
-    const header = document.querySelector(".header");
-    if (window.scrollY > 10) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
+//store\store.js
+
+const API_BASE = window.location.hostname.includes("localhost")
+  ? "http://localhost:5000"
+  : "https://enagic-kangen-backend.onrender.com";
+
+
+window.addEventListener("scroll", () => {
+const header = document.querySelector(".header");
+if (window.scrollY > 10) {
+    header.classList.add("scrolled");
+} else {
+    header.classList.remove("scrolled");
+}
+}); 
+
+document.addEventListener("DOMContentLoaded", () => {
+const menu = document.getElementById('mobileMenu');
+const hamburger = document.getElementById('hamburger');
+
+function toggleMenu() {
+    const isOpen = menu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+}
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+});
+
+document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+    menu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
     }
-    }); 
-
-    document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.getElementById('mobileMenu');
-    const hamburger = document.getElementById('hamburger');
-
-    function toggleMenu() {
-        const isOpen = menu.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', isOpen);
-    }
-
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-        menu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
-        }
-    });
-    });
+});
+});
 
 
 const products = [
@@ -78,7 +85,7 @@ function renderProducts(list) {
         product.category === "filters"
           ? `<p class="connect-message">To purchase this item, please click below.</p>
             <div id="btn-container-${product.id}">
-              <a href="/contact.html" class="connect-now-btn">Connect Now</a>
+              <a href="../customer-contact/index.html" class="connect-now-btn">Connect Now</a>
             </div>`
           : `<p>₹${product.price.toLocaleString()}</p>
             <div class="quantity-box">
@@ -111,11 +118,13 @@ function changeQty(id, delta) {
 async function addToCart(productId) {
   const quantity = qty[productId];
   try {
-    const res = await fetch("http://localhost:5000/api/cart", {
+
+    const res = await fetch(`${API_BASE}/api/cart`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ productId, quantity })
     });
+
     const data = await res.json();
     alert("✅ Added to cart!");
     cartItems[productId] = true;
@@ -127,9 +136,11 @@ async function addToCart(productId) {
 
 async function removeFromCart(productId) {
   try {
-    const res = await fetch(`http://localhost:5000/api/cart/${productId}`, {
-      method: "DELETE"
+    
+    const res = await fetch(`${API_BASE}/api/cart/${productId}`, {
+    method: "DELETE"
     });
+
     const data = await res.json();
     alert("🗑️ Removed from cart");
     cartItems[productId] = false;

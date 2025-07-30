@@ -4,8 +4,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const VerifiedEmail = require('../models/verifiedEmail');
-
-const otpStore = new Map(); // In-memory OTP store
+const UnverifiedEmail = require('../models/unverifiedEmail');
 
 // Send OTP
 router.post('/request', async (req, res) => {
@@ -20,7 +19,6 @@ router.post('/request', async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const UnverifiedEmail = require('../models/unverifiedEmail');
     await UnverifiedEmail.findOneAndUpdate(
       { email },
       { email, otp, createdAt: new Date() },
@@ -49,7 +47,6 @@ router.post('/request', async (req, res) => {
         </div>`
     });
 
-    // ✅ Only this response
     res.status(200).json({ verified: false, message: 'OTP sent to email.' });
 
   } catch (err) {
@@ -58,64 +55,38 @@ router.post('/request', async (req, res) => {
   }
 });
 
-
 // Verify OTP
 router.post('/verify', async (req, res) => {
   const { email, otp } = req.body;
-  const UnverifiedEmail = require('../models/unverifiedEmail');
-  const record = await UnverifiedEmail.findOne({ email, otp });
-
-  if (!record) {
-    return res.status(400).json({ error: 'Invalid or expired OTP' });
-  }
-
-  const now = Date.now();
-  const otpAge = now - new Date(record.createdAt).getTime();
-  if (otpAge > 5 * 60 * 1000) {
-    await UnverifiedEmail.deleteOne({ email });
-    return res.status(400).json({ error: 'OTP expired. Please request a new one.' });
-  }
-
-    await VerifiedEmail.updateOne(
-    { email },
-    { $setOnInsert: { email, verifiedAt: new Date() } },
-    { upsert: true }
-  );
-
-  await UnverifiedEmail.deleteOne({ email });
-
-  res.status(200).json({ success: true, message: 'Email verified successfully.' });
-
-
-  if (!record) {
-    return res.status(400).json({ error: 'No OTP found for this email. Please request a new one.' });
-  }
-
-  if (Date.now() > record.expiresAt) {
-    otpStore.delete(email);
-    return res.status(400).json({ error: 'OTP expired. Please request a new one.' });
-  }
-
-  if (record.otp !== otp) {
-    return res.status(400).json({ error: 'Incorrect OTP. Please try again.' });
-  }
 
   try {
-    // Save to DB
+    const record = await UnverifiedEmail.findOne({ email, otp });
+
+    if (!record) {
+      return res.status(400).json({ error: 'Invalid or expired OTP. Please request a new one.' });
+    }
+
+    const now = Date.now();
+    const otpAge = now - new Date(record.createdAt).getTime();
+
+    if (otpAge > 5 * 60 * 1000) {
+      await UnverifiedEmail.deleteOne({ email });
+      return res.status(400).json({ error: 'OTP expired. Please request a new one.' });
+    }
+
     await VerifiedEmail.updateOne(
       { email },
       { $setOnInsert: { email, verifiedAt: new Date() } },
       { upsert: true }
     );
 
-    const UnverifiedEmail = require('../models/unverifiedEmail');
     await UnverifiedEmail.deleteOne({ email });
 
-    otpStore.delete(email);
     res.status(200).json({ success: true, message: 'Email verified successfully.' });
+
   } catch (err) {
-    console.error('Failed to save verified email:', err);
-    res.status(500).json({ error: 'Failed to verify email. Please try again.' });
+    console.error('OTP verification error:', err);
+    res.status(500).json({ error: 'Verification failed. Please try again.' });
   }
 });
 
