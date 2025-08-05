@@ -43,7 +43,7 @@
 
   <section class="cart-head">
   <div class="cart-header-bar">
-    <button class="view-cart-btn" onclick="window.location.href='../cart/index.html'">🛒 View Cart</button>
+    <button class="view-cart-btn" onclick="showCartComingSoon()">🛒 View Cart</button>
   </div>
   </section>
 
@@ -89,6 +89,33 @@
 
       </div>
   </footer>
+
+  <div id="cart-modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <p>🛒 Our cart is coming soon.<br>
+        For any queries, please <a class="contact-link"
+        href="../customer-contact/index.html">Contact Us here</a>.
+      </p>
+      <button onclick="closeCartModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function showCartComingSoon() {
+      const overlay = document.getElementById('cart-modal-overlay');
+      if (overlay) {
+        overlay.style.display = 'flex';
+      }
+    }
+
+    function closeCartModal() {
+      const overlay = document.getElementById('cart-modal-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+      }
+    }
+  </script>
+
 
   <script src="store.js"></script>
 </body>

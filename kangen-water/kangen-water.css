@@ -186,7 +186,7 @@ html, body {
 
   .nav-links a {
     padding: 4px 16px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #f8f6f6;
     text-align: right;
     font-weight: 600;
   }
@@ -477,7 +477,7 @@ footer {
   font-weight: 800;
   line-height: 1.15;
   margin-bottom: 1rem;
-  color: #000;
+  color: #0b3a73;
 }
 
 .hero-subheading {

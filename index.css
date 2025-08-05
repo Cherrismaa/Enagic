@@ -583,7 +583,6 @@ nav a:hover {
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.2);
   transition: all 0.3s ease;
   min-width: 200px;
 }
@@ -739,11 +738,11 @@ nav #mobile-nav {
   }
   
   header {
-    padding: 1rem 0;
+    padding: 0.7rem 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
-   #mobile-nav {
+  #mobile-nav {
     padding-right: 1rem;
   }
 
