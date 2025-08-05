@@ -345,19 +345,17 @@
       });
     };
     window.addEventListener("scroll", showOnScroll);
-    showOnScroll(); // Initial load
+    showOnScroll(); 
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const hamburger = document.getElementById("hamburger");
       const mobileNav = document.getElementById("mobile-nav");
 
-      // Toggle menu on hamburger click
       hamburger.addEventListener("click", () => {
         mobileNav.classList.toggle("show");
       });
 
-      // ✅ Close menu if clicked outside
       document.addEventListener("click", function (event) {
         const isClickInsideMenu = mobileNav.contains(event.target);
         const isClickOnHamburger = hamburger.contains(event.target);
@@ -375,11 +373,7 @@
       <div class="popup-header">
         <div class="popup-title-block">
           <h2>Free 14 Day Enagic Machine Trial</h2>
-<<<<<<< HEAD
           <p class="no-conditions"><span class="star-icon">*</span>No conditions apply</p>
-=======
-          <p class="no-conditions"><span class="star-icon">★</span>No conditions apply</p>
->>>>>>> b705309bbd1cbf736efd651e0f56d751a88701a6
         </div>
         <span class="close-btn" id="popup-close">&times;</span>
       </div>
