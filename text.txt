@@ -1,0 +1,75 @@
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popupOverlay = document.getElementById("popup-overlay");
+    const popupClose = document.getElementById("popup-close");
+
+    // If popup was already shown in this session, do nothing
+    if (sessionStorage.getItem("popup_shown") === "true") {
+      return;
+    }
+
+    let popupClosedOnce = false;
+
+    // Show popup first time after 5 seconds
+    const firstPopupTimeout = setTimeout(() => {
+      if (!popupClosedOnce) {
+        popupOverlay.style.display = "flex";
+        popupOverlay.classList.add("show");
+        sessionStorage.setItem("popup_shown", "true"); // mark as shown
+      }
+    }, 4000);
+
+    // Show popup again after 45 seconds, only once
+    const secondPopupTimeout = setTimeout(() => {
+      const isVisible = popupOverlay.classList.contains("show");
+      if (!isVisible && popupClosedOnce) {
+        popupOverlay.style.display = "flex";
+        popupOverlay.classList.add("show");
+        sessionStorage.setItem("popup_shown", "true"); // mark as shown
+      }
+    }, 50000);
+
+    popupClose.addEventListener("click", () => {
+      popupOverlay.classList.remove("show");
+      popupOverlay.style.display = "none";
+      popupClosedOnce = true;
+    });
+  });
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const popupOverlay = document.getElementById("popup-overlay");
+    const popupClose = document.getElementById("popup-close");
+
+    const hasShownOnce = sessionStorage.getItem("popupShownOnce");
+    const hasShownTwice = sessionStorage.getItem("popupShownTwice");
+
+    if (!hasShownOnce) {
+      setTimeout(() => {
+        popupOverlay.style.display = "flex";
+        popupOverlay.classList.add("show");
+        sessionStorage.setItem("popupShownOnce", "true");
+      }, 4000);
+    }
+
+    if (!hasShownTwice) {
+      setTimeout(() => {
+        const isPopupVisible = popupOverlay.classList.contains("show");
+
+        if (!isPopupVisible && sessionStorage.getItem("popupShownOnce") === "true") {
+          popupOverlay.style.display = "flex";
+          popupOverlay.classList.add("show");
+          sessionStorage.setItem("popupShownTwice", "true");
+        }
+      }, 45000);
+    }
+
+    popupClose.addEventListener("click", () => {
+      popupOverlay.classList.remove("show");
+      popupOverlay.style.display = "none";
+    });
+  });
+</script>

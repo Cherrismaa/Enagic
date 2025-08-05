@@ -1,0 +1,219 @@
+<!-- checkout-form\index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Details</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="../assets/favicon/site.webmanifest">
+
+  <link rel="canonical" href="https://enagickangen.co.in/checkout-form/index.html">
+  <link rel="stylesheet" href="../assets/fonts/noto-sans.css">
+
+  <style>
+    body {
+      background-color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+    }
+    .error-msg {
+      font-size: 0.875rem;
+      color: #dc2626;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    .error-msg.visible {
+      display: block;
+    }
+    .loader {
+      border-color: #d1d5db;
+      border-top-color: #10b981;
+      animation: spin 1s linear infinite;
+      border-radius: 9999px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center px-4 pt-8 pb-12 bg-gradient-to-br from-white to-gray-100">
+
+  <!-- Top Bar -->
+  <div class="w-full max-w-6xl flex justify-between items-center px-4 pt-6 sm:pt-4">
+    <button onclick="window.history.back()" class="text-green-700 hover:text-green-900 font-medium text-sm md:text-base">
+      &larr; Back
+
+    </button> <a href="https://wa.me/918328668046" target="_blank" class="shrink-0">
+    <img src="https://img.icons8.com/color/96/whatsapp--v1.png" alt="WhatsApp Contact" class="w-10 h-10 sm:w-12 sm:h-12 transition-transform transform hover:scale-105"/>
+    </a>
+  </div>
+
+  <!-- Form Container -->
+  <div class="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-8 sm:p-8 border border-gray-200">
+    <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-2">Delivery Details</h2>
+    <p class="text-gray-500 text-center text-sm mb-6">Please fill out the form accurately to proceed with your order</p>
+
+    <form id="checkoutForm" action="/api/checkout" method="POST" class="space-y-4" novalidate>
+      <!-- Full Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+        <input name="fullName" type="text" maxlength="45" required class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+        <p class="error-msg" id="nameError">Please enter your first and last name.</p>
+      </div>
+
+      <!-- Mobile and Email -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
+          <div class="flex">
+            <span class="px-3 py-2 text-sm bg-gray-100 border border-r-0 border-gray-300 rounded-l-md text-gray-600">+91</span>
+            <input name="mobile" type="tel" maxlength="10" required class="w-full border border-gray-300 p-2 rounded-r-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          </div>
+          <p class="error-msg" id="mobileError">Please enter 10 digits of your mobile number</p>
+        </div>
+
+        <!-- Email Field + OTP Verification -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email Address</label>
+        <div class="flex space-x-2">
+          <input id="emailInput" name="email" type="email" maxlength="35" required 
+            class="flex-1 border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+
+          <button type="button" id="verifyEmailButton"
+            class="bg-blue-700 hover:bg-blue-600 text-white font-medium text-sm px-3 py-2 rounded-md shadow transition">
+            Verify
+          </button>
+        </div>
+
+        <!-- Inline errors -->
+        <input type="hidden" id="isEmailVerified" name="isEmailVerified" value="false"  required />
+        <p class="error-msg" id="emailError">Email must contain '@' and '.'</p>
+        <p class="error-msg" id="emailVerifyError">Please verify your email</p>
+
+        <!-- OTP Section -->
+        <div id="otpSection" class="hidden mt-4">
+          <label for="otpInput" class="block mb-1 font-medium">Enter OTP</label>
+          <input id="otpInput" type="text" maxlength="6" autocomplete="off" class="w-full border p-2 rounded mb-2" placeholder="6-digit OTP" />
+          <p id="otpError" class="text-red-600 text-sm hidden mb-2">❌ Incorrect OTP. Try again.</p>
+
+          <button id="verifyOtpButton" type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            Verify OTP
+          </button>
+          
+          <button id="cancelOtpButton" type="button" class="ml-2 text-sm text-gray-500">Cancel</button>
+
+        </div>
+
+        <p id="otpStatus" class="text-sm mt-1 text-gray-500 hidden">Enter the OTP sent to your email</p>
+
+        <p id="emailSuccessMessage" class="text-green-600 text-sm hidden">✅ Email verified</p>
+
+        </div>
+        </div>
+
+      <!-- Street + House -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Street Number</label>
+          <input name="streetNumber" type="text"  required class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          <p class="error-msg" id="streetError">Street Number is required</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">House Number</label>
+          <input name="houseNumber" type="text"  required class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          <p class="error-msg" id="houseError">House Number is required</p>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Address</label>
+        <input name="locality" type="text"  required class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+        <p class="error-msg" id="localityError">Area is required</p>
+      </div>
+
+      <!-- City / Pincode -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">City / Town</label>
+          <input name="city" type="text" required 
+            class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          <p class="error-msg" id="cityError">City / Town is required</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Pin Code</label>
+          <input name="pincode" type="text" maxlength="6"  required 
+            class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          <p class="error-msg" id="pincodeError">Please enter your 6-digit Pin Code.</p>
+        </div>
+      </div>
+
+      <!-- State & Landmark -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="relative">
+          <label class="block text-sm font-medium text-gray-700 mb-1">State</label>
+          <input id="stateSearch" type="text" placeholder="Search state..." autocomplete="off"
+            class="w-full border border-gray-300 p-2 rounded-md text-sm mb-1 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+          <ul id="stateDropdown"
+              class="absolute z-10 bg-white border border-gray-300 rounded-md w-full max-h-48 overflow-y-auto hidden"></ul>
+              
+          <input type="hidden" name="state" id="stateHidden" required />
+          <p class="error-msg" id="stateError">State is required</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Landmark <span class="text-gray-400 text-xs">(Optional)</span></label>
+          <input name="landmark" type="text"
+            class="w-full border border-gray-300 p-2 rounded-md text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"/>
+        </div>
+
+        <div class="flex items-center text-gray-500 text-xs mt-2 space-x-2 whitespace-nowrap gap-2 overflow-hidden text-ellipsis">
+          <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0-1.656-1.344-3-3-3s-3 1.344-3 3v2h6v-2z M5 11V9a7 7 0 0114 0v2M5 11v6a2 2 0 002 2h10a2 2 0 002-2v-6" />
+          </svg>
+          <span>Your information is encrypted and secure</span>
+        </div>
+
+      </div>
+
+      <!-- Submit -->
+      <div class="pt-4 flex justify-center">
+        <button type="submit"
+          class="bg-blue-700 hover:bg-blue-800 text-white font-semibold w-full sm:w-auto px-8 py-2 text-sm rounded-md shadow-md transition duration-150 mb-1">
+          Submit Form
+        </button>
+      </div>
+    </form>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-40 hidden">
+      <div class="loader ease-linear rounded-full border-4 border-t-4 border-green-600 h-12 w-12"></div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+      <div class="bg-white rounded-xl shadow-lg px-6 py-6 w-full max-w-sm text-center space-y-4">
+        <svg class="w-12 h-12 mx-auto text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+        </svg>
+        <h3 id="modalTitle" class="text-xl font-semibold text-gray-800">Form Submitted!</h3>
+        <p id="modalMessage" class="text-sm text-gray-600">Thank you. We’ve received your details successfully.</p>
+        <button id="successOkButton"
+          class="mt-2 bg-green-600 text-white font-medium px-4 py-2 rounded-md shadow hover:bg-green-700 transition">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="checkoutForm.js"></script>
+
+</body>
+</html>

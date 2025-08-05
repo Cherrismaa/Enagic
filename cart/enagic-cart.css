@@ -1,0 +1,239 @@
+body {
+  font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Back Button */
+.back-btn {
+  font-size: 0.9rem;
+  color: #ffffff;
+  background-color: #0071bc;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #3a98c4;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ccc;
+  gap: 20px;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.cart-header .back-btn {
+  position: static;
+  order: 1;
+}
+
+.cart-title-wrapper {
+  flex: 1;
+  text-align: center;
+  order: 2;
+}
+
+.cart-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cart-count-badge {
+  background: #0071bc;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  order: 3;
+}
+
+.cart-container {
+  max-width: 1000px;
+  margin: 10px auto;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-img {
+  width: 80px;
+}
+
+.remove-btn {
+  background-color: #e60023;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  background-color: #0071bc;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.quantity-controls span {
+  min-width: 24px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.cart-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.cart-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clear-btn {
+  background: #e60023;
+  color: white;
+  margin-right: 10px;
+}
+
+.checkout-btn {
+  background: #0071bc;
+  color: white;
+  margin-right: 10px;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 60px 20px;
+  display: none;
+  font-size: 18px;
+}
+
+.store-link {
+  display: inline-block;
+  margin-top: 20px;
+  background: #0071bc;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.cart-suggestions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cart-suggestions button {
+  background-color: #0071bc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cart-suggestions p {
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+/* WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  font-weight: 600;
+  padding: 14px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe5d;
+  transform: scale(1.05);
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.whatsapp-text {
+  font-size: 16px;
+}
+
+/* Responsive Fix for Header Layout */
+@media (max-width: 768px) {
+  .cart-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .cart-title-wrapper {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .cart-title {
+    font-size: 1.4rem;
+  }
+}
