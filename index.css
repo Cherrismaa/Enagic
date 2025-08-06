@@ -1346,15 +1346,17 @@ footer {
   }
 
   .popup-header h2 {
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     white-space: normal !important;
     overflow: visible !important;
     text-overflow: unset !important;
     text-align: center;
+    margin-bottom: 0.5rem;
   }
 
   .no-conditions {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-top: 0rem;
   }
 
   .close-btn {
