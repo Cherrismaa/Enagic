@@ -94,7 +94,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0.3, 0.2);
   backdrop-filter: blur(6px);
@@ -738,7 +738,7 @@ nav #mobile-nav {
   }
   
   header {
-    padding: 0.7rem 0;
+    padding: 0.6rem 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
@@ -1050,7 +1050,7 @@ footer {
   backdrop-filter: blur(2px);
   text-align: center;
   color: white;
-  padding: 1rem;
+  padding: 0.7rem;
 }
 
 .footer-desktop-line {
@@ -1168,8 +1168,8 @@ footer {
   top: 0; left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7); 
-  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.6); 
+  backdrop-filter: blur(2.5px);
   display: none;
   align-items: center;
   justify-content: center;
@@ -1346,7 +1346,7 @@ footer {
   }
 
   .popup-header h2 {
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     white-space: normal !important;
     overflow: visible !important;
     text-overflow: unset !important;
