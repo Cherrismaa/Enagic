@@ -1,12 +1,12 @@
-# Enagic Kangen India — Change Your Water, Change Your Life  
-[🌐 Visit Website](https://enagickangen.co.in)
+# Enagic Kangen India - Change Your Water, Change Your Life  
+🌐[Visit Website](https://enagickangen.co.in)
 
-A full-stack website built to showcase **Enagic® Kangen Water® machines** in India, helping people learn, compare, and connect directly for demos and purchases.
+A full-stack website built to showcase **Enagic® Kangen Water and Leveluk machines** in India, helping people learn, compare, and connect directly for demos and purchases.
 
 ---
 
 ## 📌 About the Company & Product
-Enagic® is a Japan-based global leader in alkaline ionizers and water filtration systems. The Kangen Water® technology produces **antioxidant-rich, ionized alkaline water** that supports better hydration and overall wellness.
+Enagic® is a Japan-based global leader in alkaline ionizers and water filtration systems. The Kangen Water® technology produces **antioxidant - rich, ionized alkaline water** that supports better hydration and overall wellness.
 
 ---
 
@@ -33,13 +33,14 @@ Enagic® is a Japan-based global leader in alkaline ionizers and water filtratio
 ---
 
 ## 📄 Pages Overview
-1. **Home Page** — Overview of Kangen Water® benefits and company mission  
-2. **Machines Page** — Detailed listing of models, features, and specifications  
-3. **Benefits Page** — Explains health and lifestyle benefits of Kangen Water®  
-4. **Certifications Page** — Displays all official certifications and trust seals  
-5. **Contact Page** — Email verification form + WhatsApp direct connect  
-6. **Trial/Demo Page** — Easy sign-up for free trial  
-7. **Email Verification Flow** — Secure OTP-based verification for genuine leads
+1. **Home Page** — Overview of Kangen Water® benefits and company mission
+2. **About Company** — Explains everything about the company and its mission
+3. **Machines Page** — Detailed listing of models, features, and specifications  
+4. **Benefits Page** — Explains health and lifestyle benefits of Kangen Water®  
+5. **FAQs Page** — Displays all important frequently asked questions and its answers   
+6. **Contact Page** — Email verification form + WhatsApp direct connect  
+7. **Trial/Demo Page** — Easy sign-up for free trial  
+8. **Email Verification Flow** — Secure OTP-based verification for genuine leads
 
 ---
 ## Why It Works
