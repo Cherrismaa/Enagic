@@ -1,5 +1,5 @@
 # Enagic Kangen India - Change Your Water, Change Your Life  
-🌐[Visit Website](https://enagickangen.co.in)
+🌐[Visit Website](https://cherrismaa.github.io/Enagic/)
 
 A full-stack website built to showcase **Enagic® Kangen Water and Leveluk machines** in India, helping people learn, compare, and connect directly for demos and purchases.
 
@@ -54,7 +54,7 @@ Enagic® is a Japan-based global leader in alkaline ionizers and water filtratio
 
 ---
 ## 💡 How to Use
-1. Visit the site → [enagickangen.co.in](https://enagickangen.co.in)  
+1. Visit the site → [enagickangen.co.in](https://cherrismaa.github.io/Enagic/)  
 2. Explore machines, benefits, and certifications  
 3. Fill out the contact form (with email verification) or chat via WhatsApp  
 4. Book your free trial and get started
